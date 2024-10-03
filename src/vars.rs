@@ -1,3 +1,4 @@
+use rand;
 use std::convert::TryFrom;
 use std::convert::TryInto;
 
@@ -39,4 +40,24 @@ pub fn pluser() {
     }
 
     println!("sum {:?}", sum);
+}
+
+enum Gender {
+    Male,
+    Female,
+}
+struct User {
+    user_name: String,
+    last_name: String,
+    number: u32,
+    gender: Gender,
+}
+
+fn User_generator(user_name: String, last_name: String, gender: Gender) -> User {
+    User {
+        user_name,
+        last_name,
+        number: rand::random(),
+        gender,
+    }
 }
