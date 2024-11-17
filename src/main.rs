@@ -1,20 +1,27 @@
-use crossterm::terminal::disable_raw_mode;
-use crossterm::terminal::enable_raw_mode;
-use std::io::{self, Read};
+#![warn(clippy::all, clippy::pedantic, clippy::restriction)]
+#![allow(
+    clippy::missing_docs_in_private_items,
+    clippy::implicit_return,
+    clippy::shadow_reuse,
+    clippy::print_stdout,
+    clippy::wildcard_enum_match_arm,
+    clippy::else_if_without_else
+)]
+mod document;
+mod editor;
+mod filetype;
+mod highlighting;
+mod row;
+mod terminal;
+pub use document::Document;
+use editor::Editor;
+pub use editor::Position;
+pub use editor::SearchDirection;
+pub use filetype::FileType;
+pub use filetype::HighlightingOptions;
+pub use row::Row;
+pub use terminal::Terminal;
 
 fn main() {
-    enable_raw_mode().unwrap();
-    for b in io::stdin().bytes() {
-        let b = b.unwrap();
-        let c = b as char;
-        if c.is_control() {
-            println!("Binary: {0:08b} ASCII: {0:#03} \r", b);
-        } else {
-            println!("Binary: {0:08b} ASCII: {0:#03} Character: {1:#?}\r", b, c);
-        }
-        if c == 'q' {
-            disable_raw_mode().unwrap();
-            break;
-        }
-    }
+    Editor::default().run();
 }

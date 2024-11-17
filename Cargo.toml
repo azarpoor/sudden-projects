@@ -1,7 +1,10 @@
 [package]
 name = "hecto"
 version = "0.1.0"
-edition = "2021"
+authors = ["Philipp Flenker <hello@philippflenker.com>"]
+edition = "2018"
+
 
 [dependencies]
-crossterm = "0.28.1"
+termion = "1"
+unicode-segmentation = "1"
